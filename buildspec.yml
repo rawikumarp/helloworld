@@ -16,7 +16,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      #- docker login -u rawikumarp -p $password
+      - docker login -u rawikumarp -p $password
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
@@ -24,8 +24,8 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-     # - echo Writing image definitions file...
-     # - printf '[{"name":"node-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-     # - cat imagedefinitions.json 
+      - echo Writing image definitions file...
+      - printf '[{"name":"node-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json 
 artifacts:
-    #files: imagedefinitions.json
+    files: imagedefinitions.json
